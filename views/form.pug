@@ -1,0 +1,48 @@
+extends layout 
+
+block layout-content
+    p Add Customer 
+    form.my-2(action="/addcustomer" method="post")
+        .custom-file
+            input.custom-file-input(type="file" id="customFile" name="photo" placeholder="Upload customers picture") 
+            label.custom-file-label(for="customFile") Customer's picture
+        .form-group 
+            label(for="name") Fullname
+            input.form-control(type="text" name="name" placeholder="Enter customers name") 
+        .form-group 
+            label(for="gender") Gender 
+            select#gender.form-control(name="gender")
+                option(value="") -- Select customer gender -- 
+                option(value="Male") Male 
+                option(value="Female") Female
+                option(value="Rather Not Say")
+        .form-group
+            label(for="age") Age 
+            input.form-control(type="number" name="photo" placeholder="Customer's age") 
+        .form-group 
+            label(for="status") Employment status 
+            select#empstatus.form-control(name="status")
+                option(value="") -- Select employment status --
+                option(value="employed") Employed 
+                option(value="unemployed") Unemployed   
+        .form-group 
+            label(for="name") Id Number
+            input.form-control(type="text" name="idnumber" placeholder="Customer's ID number") 
+        .w-100.d-flex.flex-row 
+            button.btn.btn-success(type="submit") Add Customer
+            a.btn.btn-danger.ml-2(href="/") Cancel
+
+        <!-- Modal -->
+        
+        #exampleModalCenter.modal.fade(tabindex='-1', role='dialog', aria-labelledby='exampleModalCenterTitle', aria-hidden='true')
+            .modal-dialog.modal-dialog-centered(role='document')
+                .modal-content
+                    .modal-header
+                        h5#exampleModalLongTitle.modal-title Modal title
+                        button.close(type='button', data-dismiss='modal', aria-label='Close')
+                            span(aria-hidden='true') &times;
+                    .modal-body
+                    .modal-footer
+                        button.btn.btn-secondary(type='button', data-dismiss='modal') Close
+                        button.btn.btn-primary(type='button') Save changes
+
