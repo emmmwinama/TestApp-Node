@@ -2,12 +2,13 @@ extends layout
 
 block layout-content
     p Add Customer 
-    form.my-2(action="/addcustomer" method="post")
-        .custom-file
-            input.custom-file-input(type="file" id="customFile" name="photo" placeholder="Upload customers picture") 
-            label.custom-file-label(for="customFile") Customer's picture
+    form.my-2(role='form' action="/customer" method="POST")
+        input(type='hidden', name='_csrf', value='{{csrf}}')
+        //- .custom-file
+        //-     input.custom-file-input(type="file" id="photo" name="photo" placeholder="Upload customers picture") 
+        //-     label.custom-file-label(for="customFile") Customer's picture
         .form-group 
-            label(for="name") Fullname
+            label(for="name") Full name
             input.form-control(type="text" name="name" placeholder="Enter customers name") 
         .form-group 
             label(for="gender") Gender 
@@ -18,7 +19,7 @@ block layout-content
                 option(value="Rather Not Say")
         .form-group
             label(for="age") Age 
-            input.form-control(type="number" name="photo" placeholder="Customer's age") 
+            input.form-control(type="number" name="age" placeholder="Customer's age") 
         .form-group 
             label(for="status") Employment status 
             select#empstatus.form-control(name="status")
@@ -29,7 +30,11 @@ block layout-content
             label(for="name") Id Number
             input.form-control(type="text" name="idnumber" placeholder="Customer's ID number") 
         .w-100.d-flex.flex-row 
-            button.btn.btn-success(type="submit") Add Customer
+            //- button.btn.btn-primary(type="submit" data-toggle="modal" data-target="#exampleModalCenter") Add Customer
+            //- <!-- Button trigger modal -->
+
+            button.btn.btn-primary(type='submit') Submit
+            //- button.btn.btn-primary(type='submit', data-toggle='modal', data-target='#exampleModalCenter') Launch demo modal
             a.btn.btn-danger.ml-2(href="/") Cancel
 
         <!-- Modal -->
@@ -44,5 +49,5 @@ block layout-content
                     .modal-body
                     .modal-footer
                         button.btn.btn-secondary(type='button', data-dismiss='modal') Close
-                        button.btn.btn-primary(type='button') Save changes
+                        button.btn.btn-primary(type='submit') Save changes
 
