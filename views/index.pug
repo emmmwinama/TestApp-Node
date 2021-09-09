@@ -9,7 +9,6 @@ block layout-content
             thead 
                 tr 
                     th(scope="col") No.
-                    th(scope="col") Photo
                     th(scope="col") Full name
                     th(scope="col") Age
                     th(scope="col") Gender
@@ -17,19 +16,13 @@ block layout-content
                     th(scope="col") Id Number
 
             tbody
-                tr 
-                    td(scope="col") 1
-                    td(scope="col") Photo
-                    td(scope="col") Emmanuel Mwinama
-                    td(scope="col") 16
-                    td(scope="col") Male
-                    td(scope="col") Employed
-                    td(scope="col") GWAMKC019
-                tr 
-                    td(scope="col") 1
-                    td(scope="col") Photo
-                    td(scope="col") Emmanuel Mwinama
-                    td(scope="col") 16
-                    td(scope="col") Male
-                    td(scope="col") Employed
-                    td(scope="col") GWAMKC019
+                each customer, index in customers 
+                    tr 
+                        td(scope="col")= customer.id
+                        td(scope="col")= customer.Fullname
+                        td(scope="col")= customer.Age 
+                        td(scope="col")= customer.Gender
+                        td(scope="col")= customer.EmployeeStat 
+                        td(scope="col")= customer.IdNumber
+                else 
+                    p There are no customers in the system

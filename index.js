@@ -22,11 +22,31 @@ app.get('/add-customer', (req, res) => {
 
 // API endpoint to render HTML file
 app.get('/', (req, res) => {
-  res.status(200).render('index');
+  // conn.connect((err) => {
+  //   if (err) console.log('Error:' + err.message);
+  //   console.log('connected');
+  // });
+
+  conn.query(
+    'SELECT id, Fullname, Age, Gender, EmployeeStat, IdNumber FROM customer',
+    (err, result, fields) => {
+      if (err) console.log('Error: ' + err.message);
+      console.log(result);
+      res.status(200).render('index', { customers: result });
+    }
+  );
+
+  // conn.end();
 });
 
 app.post('/customer', (req, res) => {
-  var query = 'INSERT INTO customer(Fullname, Age, Gender, EmployeeStat, idNumber) VALUES ?';
+  // conn.connect((err) => {
+  //   if (err) throw err;
+  //   console.log('Connected');
+  // });
+
+  var query =
+    'INSERT INTO customer(Fullname, Age, Gender, EmployeeStat, idNumber) VALUES ?';
   var values = [
     [
       req.body.name,
@@ -36,15 +56,13 @@ app.post('/customer', (req, res) => {
       req.body.idnumber,
     ],
   ];
-  conn.connect((err) => {
+
+  conn.query(query, [values], (err, result) => {
     if (err) throw err;
-    console.log('Connected');
-    conn.query(query, [values], (err, result) => {
-      if (err) throw err;
-      console.log('Number of Affected Rows: ' + result.affectedRows);
-    });
+    console.log('Number of Affected Rows: ' + result.affectedRows);
   });
-  console.log(values);
+
+  // conn.end();
   res.redirect(303, '/');
 });
 
